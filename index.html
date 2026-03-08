@@ -3,29 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1 ULTIMATE PRODE 2026</title>
+    <title>F1 LEGUIDAMÓN PRODE 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Titillium+Web:wght@300;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --f1-red: #e10600;
             --f1-black: #15151e;
             --f1-dark-grey: #1f1f27;
-            --glass: rgba(255, 255, 255, 0.05);
             --gold: #ffcf00;
+            --accent: #38383f;
         }
 
-        * { box-sizing: border-box; transition: all 0.3s ease; }
+        * { box-sizing: border-box; transition: all 0.2s ease; }
 
         body {
             font-family: 'Titillium Web', sans-serif;
             background: radial-gradient(circle at top, #2b2b36 0%, #0b0b10 100%);
             color: white;
             margin: 0;
-            overflow-x: hidden;
             min-height: 100vh;
         }
 
-        /* --- NAVEGACIÓN ESTILO PADDOCK --- */
         header {
             background: rgba(21, 21, 30, 0.95);
             backdrop-filter: blur(10px);
@@ -34,231 +32,163 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            position: sticky; top: 0; z-index: 1000;
         }
 
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            color: white;
-            text-shadow: 2px 2px var(--f1-red);
-        }
+        .logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.2rem; text-shadow: 2px 2px var(--f1-red); }
 
-        .nav-group button {
-            background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: white;
-            padding: 10px 20px;
-            margin-left: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
-        }
-
-        .nav-group button:hover {
-            background: var(--f1-red);
-            box-shadow: 0 0 15px var(--f1-red);
-        }
-
-        /* --- CONTENEDORES --- */
-        .container { max-width: 1300px; margin: 40px auto; padding: 0 20px; }
+        .container { max-width: 1300px; margin: 20px auto; padding: 0 20px; }
         .hidden { display: none !important; }
 
-        /* --- CARTAS DE GP (DISEÑO MODERNO) --- */
-        .gp-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .gp-card {
+        /* Botonera de Números */
+        .number-paddock {
+            position: sticky;
+            top: 80px;
             background: var(--f1-dark-grey);
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            border: 1px solid rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid var(--f1-red);
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 8px;
+            margin-bottom: 20px;
+            z-index: 900;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .gp-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--f1-red);
-            box-shadow: 0 15px 40px rgba(225, 6, 0, 0.3);
-        }
-
-        .gp-image-container {
-            height: 180px;
-            position: relative;
-            background: #000;
-        }
-
-        .gp-img {
-            width: 100%; height: 100%; object-fit: cover;
-            opacity: 0.6;
-        }
-
-        .sprint-ribbon {
-            position: absolute;
-            top: 0; right: 0;
-            background: linear-gradient(45deg, #ff8c00, #e10600);
-            color: white;
-            padding: 5px 20px;
-            font-weight: bold;
-            font-size: 12px;
-            transform: rotate(0deg);
-            font-family: 'Orbitron';
-        }
-
-        .gp-info { padding: 20px; border-top: 2px solid var(--f1-red); }
-        .gp-info h3 { margin: 0; font-family: 'Orbitron'; font-size: 1.2rem; }
-        .gp-info p { margin: 5px 0 0; color: #aaa; font-size: 0.9rem; }
-
-        /* --- SECCIÓN PREDICCIÓN --- */
-        .prediction-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        @media (max-width: 800px) { .prediction-layout { grid-template-columns: 1fr; } }
-
-        .column-box {
-            background: rgba(0,0,0,0.3);
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid var(--accent);
-        }
-
-        .driver-slot {
-            display: flex;
-            align-items: center;
-            background: var(--glass);
-            margin-bottom: 8px;
-            padding: 5px 15px;
-            border-radius: 8px;
-            border-left: 4px solid var(--f1-red);
-        }
-
-        .driver-slot span { width: 40px; font-weight: bold; font-family: 'Orbitron'; }
-
-        select {
-            background: #15151e;
-            color: white;
-            border: 1px solid #444;
-            padding: 10px;
-            border-radius: 5px;
-            width: 100%;
-            outline: none;
-        }
-
-        /* --- TABLA DE POSICIONES --- */
-        .leaderboard {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 10px;
-        }
-
-        .leaderboard tr { background: var(--f1-dark-grey); }
-        .leaderboard td { padding: 20px; }
-        .leaderboard tr:first-child { border-left: 5px solid var(--gold); background: rgba(255, 207, 0, 0.1); }
-        .pos-num { font-family: 'Orbitron'; font-size: 1.5rem; font-weight: 900; }
-
-        .btn-main {
-            background: var(--f1-red);
+        .num-btn {
+            background: var(--accent);
             color: white;
             border: none;
-            padding: 15px 40px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Orbitron';
+            font-weight: bold;
+        }
+
+        .num-btn.used { opacity: 0.1; cursor: not-allowed; filter: grayscale(1); }
+        .num-btn.active-sel { border: 2px solid var(--gold); background: #444; }
+
+        /* Grid de Pilotos */
+        .prediction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .driver-card {
+            background: var(--f1-dark-grey);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .pos-circle {
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            background: var(--f1-black);
+            border: 2px dashed var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-family: 'Orbitron';
             font-weight: 900;
-            border-radius: 50px;
+            color: var(--gold);
             cursor: pointer;
-            text-transform: uppercase;
-            box-shadow: 0 5px 20px rgba(225, 6, 0, 0.4);
         }
 
-        .btn-main:hover { transform: scale(1.05); filter: brightness(1.2); }
+        .assigned .pos-circle { background: var(--f1-red); color: white; border-style: solid; }
 
-        /* Login */
-        .login-screen {
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        /* Calendario */
+        .gp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .gp-card { background: var(--f1-dark-grey); border-radius: 15px; overflow: hidden; cursor: pointer; border: 1px solid rgba(255,255,255,0.05); }
+        .gp-img { width: 100%; height: 140px; object-fit: cover; opacity: 0.5; }
+        .gp-info { padding: 12px; border-top: 3px solid var(--f1-red); }
+
+        .btn-main {
+            background: var(--f1-red); color: white; border: none; padding: 12px 25px;
+            font-family: 'Orbitron'; border-radius: 50px; cursor: pointer; font-weight: 900;
+            text-transform: uppercase; font-size: 0.8rem;
         }
 
-        .user-btn {
-            width: 200px;
-            padding: 20px;
-            margin: 10px;
-            font-size: 1.2rem;
-        }
+        .leaderboard { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
+        .leaderboard tr { background: var(--f1-dark-grey); }
+        .leaderboard td { padding: 20px; font-size: 1.3rem; }
     </style>
 </head>
 <body>
 
 <header id="navbar" class="hidden">
     <div class="logo">F1 2026 PRODE</div>
-    <div class="nav-group">
-        <span id="userDisplay" style="color: var(--gold); font-weight: bold; margin-right: 10px;"></span>
-        <button onclick="changeView('view-dashboard')">CALENDARIO</button>
-        <button onclick="changeView('view-leaderboard')">POSICIONES</button>
-        <button onclick="changeView('view-admin')">ADMIN</button>
-        <button onclick="location.reload()" style="background: #333;">SALIR</button>
-    </div>
+    <div id="userDisplay" style="color: var(--gold); font-family: 'Orbitron';"></div>
+    <nav>
+        <button class="btn-main" onclick="app.showDashboard()">CALENDARIO</button>
+        <button class="btn-main" onclick="changeView('view-leaderboard')">POSICIONES</button>
+        <button class="btn-main" style="background: #444;" onclick="changeView('view-admin')">ADMIN</button>
+    </nav>
 </header>
 
 <div class="container">
-    
-    <div id="view-login" class="login-screen">
-        <h1 style="font-family: 'Orbitron'; font-size: 3rem; margin-bottom: 40px;">¿QUIÉN CORRE HOY?</h1>
-        <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-            <button class="btn-main user-btn" onclick="app.login('Sole')">SOLE</button>
-            <button class="btn-main user-btn" onclick="app.login('Marce')">MARCE</button>
-            <button class="btn-main user-btn" onclick="app.login('Valen')">VALEN</button>
-            <button class="btn-main user-btn" onclick="app.login('Agus')">AGUS</button>
+    <div id="view-login" style="text-align: center; margin-top: 80px;">
+        <h1 style="font-family: 'Orbitron'; font-size: 2.5rem;">LEGUIDAMÓN F1 PRODE</h1>
+        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px;">
+            <button class="btn-main" onclick="app.login('Sole')">SOLE</button>
+            <button class="btn-main" onclick="app.login('Marce')">MARCE</button>
+            <button class="btn-main" onclick="app.login('Valen')">VALEN</button>
+            <button class="btn-main" onclick="app.login('Agus')">AGUS</button>
         </div>
     </div>
 
     <div id="view-dashboard" class="hidden">
-        <h2 style="font-family: 'Orbitron'; border-bottom: 2px solid var(--f1-red); padding-bottom: 10px;">CALENDARIO MUNDIAL 2026</h2>
+        <h2 style="font-family: Orbitron; border-left: 5px solid var(--f1-red); padding-left: 15px;">TEMPORADA 2026</h2>
         <div id="gpGrid" class="gp-grid"></div>
     </div>
 
     <div id="view-prediction" class="hidden">
-        <h2 id="predTitle" style="font-family: 'Orbitron';"></h2>
-        <div class="prediction-layout" id="predictionLayout"></div>
-        <div style="text-align: center; margin-top: 40px;">
-            <button class="btn-main" onclick="app.savePredictions()">GUARDAR PRONÓSTICOS</button>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <h2 id="predTitle" style="font-family: Orbitron;"></h2>
+            <div id="modeToggle">
+                <button id="btnRace" class="btn-main" onclick="app.toggleSubView('race')">CARRERA</button>
+                <button id="btnSprint" class="btn-main" onclick="app.toggleSubView('sprint')" style="background:#555">SPRINT</button>
+            </div>
+        </div>
+        <div id="numberSelector" class="number-paddock"></div>
+        <div id="driverList" class="prediction-grid"></div>
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="btn-main" onclick="app.savePredictions()" style="padding: 20px 50px; font-size: 1.2rem;">GUARDAR PRONÓSTICO</button>
         </div>
     </div>
 
     <div id="view-admin" class="hidden">
-        <h2 style="font-family: 'Orbitron';">PANEL DE CONTROL (RESULTADOS REALES)</h2>
-        <select id="adminSelect" onchange="app.loadAdminInputs()" style="margin-bottom: 20px;"></select>
-        <div id="adminInputs" class="prediction-layout"></div>
-        <div id="adminAction" class="hidden" style="text-align: center; margin-top: 30px;">
-            <button class="btn-main" onclick="app.calculateEverything()">PUBLICAR Y CALCULAR PUNTOS</button>
+        <h2 style="font-family: Orbitron;">CONTROL DE CARRERA (ADMIN)</h2>
+        <div style="background: var(--f1-dark-grey); padding: 20px; border-radius: 15px; margin-bottom: 30px;">
+            <label>Seleccionar GP para cargar RESULTADO REAL:</label>
+            <select id="adminSelect" style="padding:10px; background:#222; color:white; width:100%; margin-top:10px;" onchange="app.loadAdminView()"></select>
+        </div>
+        
+        <div id="adminNumberSelector" class="number-paddock"></div>
+        <div id="adminDriverList" class="prediction-grid"></div>
+        
+        <div style="text-align: center; margin-top: 30px; display: flex; flex-direction: column; gap: 20px;">
+            <button class="btn-main" style="background:green" onclick="app.calculateScores()">CALCULAR PUNTOS FAMILIARES</button>
+            <hr style="width: 100%; opacity: 0.1;">
+            <button class="btn-main" style="background: #333; font-size: 0.6rem; opacity: 0.7;" onclick="app.resetStats()">REINICIAR TODO EL PRODE (ESTADÍSTICAS A 0)</button>
         </div>
     </div>
 
     <div id="view-leaderboard" class="hidden">
-        <h2 style="font-family: 'Orbitron'; text-align: center;">CAMPEONATO DE LA FAMILIA</h2>
+        <h2 style="font-family: Orbitron; text-align: center;">TABLA DEL CAMPEONATO</h2>
         <table class="leaderboard">
             <tbody id="leaderboardBody"></tbody>
         </table>
     </div>
-
 </div>
 
 <script>
-    // --- DATOS COMPLETOS 2026 ---
     const DRIVERS = [
         "Lando Norris #1", "Oscar Piastri #81", "Max Verstappen #3", "Isack Hadjar #6",
         "Charles Leclerc #16", "Lewis Hamilton #44", "George Russell #63", "Kimi Antonelli #12",
@@ -270,15 +200,16 @@
 
     const CALENDAR = [
         { id: 1, name: "Australia", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2024/12/Australia-Circuit-2025.webp" },
-        { id: 2, name: "China", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2025/01/Circuit-Map-China-F1-_1_-Tile.webp" },
+        { id: 2, name: "China", sprint: true, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2025/01/Circuit-Map-China-F1-_1_-Tile.webp" },
         { id: 3, name: "Japón", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-Japan-F1.webp" },
         { id: 4, name: "Baréin", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-Bahrain-F1.webp" },
         { id: 5, name: "Arabia Saudita", sprint: false, img: "https://www.racefans.net/wp-content/uploads/2021/07/racefansdotnet-jeddah-corniche-circuit.jpg" },
-        { id: 6, name: "Miami", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2021/05/Miami_Version-2-rectangle_map.webp" },
-        { id: 7, name: "Canadian", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-Canada-F1.webp" },
+        { id: 6, name: "Miami", sprint: true, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2021/05/Miami_Version-2-rectangle_map.webp" },
+        { id: 7, name: "Emilia-Romaña", sprint: false, img: "https://gpticketstore.vshcdn.net/uploads/images/13455/2025-f1-emilia-romagna-gp-imola-v2.jpg" },
         { id: 8, name: "Mónaco", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-Monaco-F1.webp" },
         { id: 9, name: "España", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-Spain-F1.webp" },
-        { id: 11, name: "Austria", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-Austria-F1.webp" },
+        { id: 10, name: "Canadá", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-Canada-F1.webp" },
+        { id: 11, name: "Austria", sprint: true, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-Austria-F1.webp" },
         { id: 12, name: "Gran Bretaña", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2025/01/Circuit-Map-Silverstone-F1-_1_-Tile.webp" },
         { id: 13, name: "Bélgica", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-Belgium-F1.webp" },
         { id: 14, name: "Hungría", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2023/08/Circuit-Map-Hungary-F1-_v2_-compressed-scaled-1.webp" },
@@ -286,209 +217,192 @@
         { id: 16, name: "Italia", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2025/01/monza-circuit-2025_transparent.webp" },
         { id: 17, name: "Azerbaiyán", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-Baku-F1.webp" },
         { id: 18, name: "Singapur", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-Singapore-F1.webp" },
-        { id: 19, name: "Estados Unidos", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-US-F1.webp" },
+        { id: 19, name: "Austin (EE.UU)", sprint: true, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-US-F1.webp" },
         { id: 20, name: "México", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-Mexico-F1.webp" },
-        { id: 21, name: "Brasil", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-Brazil-F1.webp" },
+        { id: 21, name: "Brasil", sprint: true, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2022/07/Circuit-Map-Brazil-F1.webp" },
         { id: 22, name: "Las Vegas", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2024/12/Las-Vegas-2025.png" },
-        { id: 23, name: "Qatar", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2026/02/Lusail-Grandstands.jpg" },
+        { id: 23, name: "Qatar", sprint: true, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2026/02/Lusail-Grandstands.jpg" },
         { id: 24, name: "Abu Dhabi", sprint: false, img: "https://www.grandprixgrandtours.com/wp-content/uploads/2024/11/Circuit-Map-Abu-Dhabi-F1.webp" }
     ];
 
-    // --- MOTOR DE LA APP ---
     const app = {
-        user: null,
-        currentGp: null,
-        data: JSON.parse(localStorage.getItem('f1_prode_v2')) || {
-            preds: {}, // {User: {gpId: {race: [], sprint: []}}}
-            results: {}, // {gpId: {race: [], sprint: []}}
-            scores: { Sole: 0, Marce: 0, Valen: 0, Agus: 0 }
-        },
+        user: null, currentGp: null, activeSubView: 'race', selectedNumber: null, isAdmin: false,
+        tempPreds: { race: {}, sprint: {} },
+        data: JSON.parse(localStorage.getItem('f1_prode_v6')) || { preds: {}, results: {}, scores: { Sole: 0, Marce: 0, Valen: 0, Agus: 0 } },
 
         login(u) {
             this.user = u;
             document.getElementById('userDisplay').innerText = `PILOTO: ${u}`;
-            changeView('view-dashboard');
+            document.getElementById('view-login').classList.add('hidden');
             document.getElementById('navbar').classList.remove('hidden');
-            this.renderGrid();
+            this.showDashboard();
         },
 
-        renderGrid() {
+        showDashboard() {
+            changeView('view-dashboard');
             const grid = document.getElementById('gpGrid');
             grid.innerHTML = "";
             CALENDAR.forEach(gp => {
+                const hasPred = this.data.preds[this.user]?.[gp.id] ? '✅' : '❌';
                 const card = document.createElement('div');
                 card.className = 'gp-card';
                 card.onclick = () => this.openGp(gp);
-                const hasPred = this.data.preds[this.user]?.[gp.id] ? '✅' : '❌';
-                card.innerHTML = `
-                    <div class="gp-image-container">
-                        ${gp.sprint ? '<div class="sprint-ribbon">SPRINT</div>' : ''}
-                        <img class="gp-img" src="${gp.img}">
-                    </div>
-                    <div class="gp-info">
-                        <h3>${gp.name}</h3>
-                        <p>${hasPred} Tu predicción</p>
-                    </div>
-                `;
+                card.innerHTML = `<img class="gp-img" src="${gp.img}"><div class="gp-info"><h3>${gp.name}</h3><p>${hasPred} Tu predicción</p></div>`;
                 grid.appendChild(card);
             });
         },
 
         openGp(gp) {
-            this.currentGp = gp;
+            this.isAdmin = false; this.currentGp = gp;
+            const saved = this.data.preds[this.user]?.[gp.id] || { race: [], sprint: [] };
+            this.loadTemp(saved);
             changeView('view-prediction');
-            document.getElementById('predTitle').innerText = `PRONÓSTICOS: ${gp.name.toUpperCase()}`;
-            const layout = document.getElementById('predictionLayout');
-            layout.innerHTML = "";
-
-            // SIEMPRE generar Carrera Principal
-            const raceCol = this.createColumn(gp.id, 'race', 'CARRERA PRINCIPAL (Top 22)');
-            layout.appendChild(raceCol);
-
-            // Si hay Sprint, generar columna Sprint
-            if(gp.sprint) {
-                const sprintCol = this.createColumn(gp.id, 'sprint', 'CARRERA SPRINT (Top 8)');
-                layout.prepend(sprintCol); // Sprint primero
-            }
-
-            // Cargar datos guardados
-            const saved = this.data.preds[this.user]?.[gp.id];
-            if(saved) {
-                if(saved.race) saved.race.forEach((d, i) => { if(document.getElementById(`sel-${gp.id}-race-${i}`)) document.getElementById(`sel-${gp.id}-race-${i}`).value = d; });
-                if(saved.sprint) saved.sprint.forEach((d, i) => { if(document.getElementById(`sel-${gp.id}-sprint-${i}`)) document.getElementById(`sel-${gp.id}-sprint-${i}`).value = d; });
-            }
+            this.refreshUI();
         },
 
-        createColumn(gpId, type, title) {
-            const div = document.createElement('div');
-            div.className = 'column-box';
-            div.innerHTML = `<h3 style="color:var(--f1-red); font-family:Orbitron; border-bottom:1px solid #444; padding-bottom:10px;">${title}</h3>`;
-            const count = type === 'sprint' ? 8 : 22;
-            for(let i=0; i<count; i++) {
-                div.innerHTML += `
-                    <div class="driver-slot">
-                        <span>P${i+1}</span>
-                        <select id="sel-${gpId}-${type}-${i}">
-                            <option value="">- Seleccionar -</option>
-                            ${DRIVERS.map(d => `<option value="${d}">${d}</option>`).join('')}
-                        </select>
-                    </div>
-                `;
-            }
-            return div;
+        loadAdminView() {
+            this.isAdmin = true;
+            const gpId = document.getElementById('adminSelect').value;
+            this.currentGp = CALENDAR.find(g => g.id == gpId);
+            if(!this.currentGp) return;
+            const saved = this.data.results[gpId] || { race: [], sprint: [] };
+            this.loadTemp(saved);
+            this.refreshUI();
         },
+
+        loadTemp(source) {
+            this.tempPreds = { race: {}, sprint: {} };
+            if(source.race) source.race.forEach((p, i) => { if(p) this.tempPreds.race[DRIVERS.indexOf(p)] = i+1; });
+            if(source.sprint) source.sprint.forEach((p, i) => { if(p) this.tempPreds.sprint[DRIVERS.indexOf(p)] = i+1; });
+        },
+
+        refreshUI() {
+            const containerNum = this.isAdmin ? 'adminNumberSelector' : 'numberSelector';
+            const containerDrivers = this.isAdmin ? 'adminDriverList' : 'driverList';
+            document.getElementById('predTitle').innerText = `${this.currentGp.name} - ${this.activeSubView.toUpperCase()}`;
+            document.getElementById('btnSprint').className = this.currentGp.sprint ? 'btn-main' : 'hidden';
+
+            const numBox = document.getElementById(containerNum);
+            numBox.innerHTML = "";
+            const max = (this.activeSubView === 'sprint') ? 8 : 22;
+            for(let i=1; i<=max; i++) {
+                const btn = document.createElement('button');
+                btn.className = `num-btn ${Object.values(this.tempPreds[this.activeSubView]).includes(i) ? 'used' : ''} ${this.selectedNumber === i ? 'active-sel' : ''}`;
+                btn.innerText = i;
+                btn.onclick = () => { if(!btn.classList.contains('used')) { this.selectedNumber = i; this.refreshUI(); } };
+                numBox.appendChild(btn);
+            }
+
+            const driBox = document.getElementById(containerDrivers);
+            driBox.innerHTML = "";
+            DRIVERS.forEach((d, idx) => {
+                const pos = this.tempPreds[this.activeSubView][idx];
+                const card = document.createElement('div');
+                card.className = `driver-card ${pos ? 'assigned' : ''}`;
+                card.innerHTML = `<span>${d}</span><div class="pos-circle" onclick="app.clickDriver(${idx})">${pos || ''}</div>`;
+                driBox.appendChild(card);
+            });
+        },
+
+        clickDriver(idx) {
+            if(this.tempPreds[this.activeSubView][idx]) delete this.tempPreds[this.activeSubView][idx];
+            else if(this.selectedNumber) { this.tempPreds[this.activeSubView][idx] = this.selectedNumber; this.selectedNumber = null; }
+            this.refreshUI();
+        },
+
+        toggleSubView(v) { this.activeSubView = v; this.refreshUI(); },
 
         savePredictions() {
+            const res = this.convertTempToArr();
             if(!this.data.preds[this.user]) this.data.preds[this.user] = {};
-            const gp = this.currentGp;
-            
-            let race = [];
-            for(let i=0; i<22; i++) race.push(document.getElementById(`sel-${gp.id}-race-${i}`).value);
-            
-            let sprint = [];
-            if(gp.sprint) {
-                for(let i=0; i<8; i++) sprint.push(document.getElementById(`sel-${gp.id}-sprint-${i}`).value);
-            }
-
-            this.data.preds[this.user][gp.id] = { race, sprint };
-            this.save();
-            alert("¡Velocidad máxima! Predicciones guardadas.");
-            changeView('view-dashboard');
-            this.renderGrid();
+            this.data.preds[this.user][this.currentGp.id] = res;
+            this.save(); alert("¡Pronóstico guardado!"); this.showDashboard();
         },
 
-        loadAdminInputs() {
-            const gpId = parseInt(document.getElementById('adminSelect').value);
-            if(!gpId) return;
-            const gp = CALENDAR.find(g => g.id === gpId);
-            const container = document.getElementById('adminInputs');
-            container.innerHTML = "";
-            container.appendChild(this.createColumn(gp.id, 'adm-race', 'RESULTADO REAL CARRERA'));
-            if(gp.sprint) container.appendChild(this.createColumn(gp.id, 'adm-sprint', 'RESULTADO REAL SPRINT'));
-            document.getElementById('adminAction').classList.remove('hidden');
+        convertTempToArr() {
+            const r = new Array(22).fill(""); const s = new Array(8).fill("");
+            Object.entries(this.tempPreds.race).forEach(([idx, p]) => r[p-1] = DRIVERS[idx]);
+            Object.entries(this.tempPreds.sprint).forEach(([idx, p]) => s[p-1] = DRIVERS[idx]);
+            return { race: r, sprint: s };
         },
 
-        calculateEverything() {
-            const gpId = parseInt(document.getElementById('adminSelect').value);
-            const gp = CALENDAR.find(g => g.id === gpId);
+        calculateScores() {
+            const gpId = this.currentGp.id;
+            this.data.results[gpId] = this.convertTempToArr();
             
-            let resRace = [];
-            for(let i=0; i<22; i++) resRace.push(document.getElementById(`sel-${gpId}-adm-race-${i}`).value);
-            let resSprint = [];
-            if(gp.sprint) {
-                for(let i=0; i<8; i++) resSprint.push(document.getElementById(`sel-${gpId}-adm-sprint-${i}`).value);
-            }
-
-            this.data.results[gpId] = { race: resRace, sprint: resSprint };
-            
-            // RECALCULO TOTAL
+            // Reiniciar puntajes y calcular desde cero basándose en todos los resultados cargados
             this.data.scores = { Sole: 0, Marce: 0, Valen: 0, Agus: 0 };
             
             Object.keys(this.data.results).forEach(id => {
-                const real = this.data.results[id];
-                const gId = parseInt(id);
-
+                const real = this.data.results[id]; // El orden oficial cargado por admin
                 ['Sole', 'Marce', 'Valen', 'Agus'].forEach(u => {
-                    const pred = this.data.preds[u]?.[gId];
-                    if(!pred) return;
+                    const userPred = this.data.preds[u]?.[id];
+                    if(!userPred) return;
 
-                    // Puntos Carrera
-                    real.race.forEach((driver, posReal) => {
-                        const posUser = pred.race.indexOf(driver);
-                        if(posUser !== -1) {
-                            const diff = Math.abs(posReal - posUser);
-                            if(diff === 0) this.data.scores[u] += 20;
-                            else if(diff === 1) this.data.scores[u] += 5;
-                        }
-                    });
-
-                    // Puntos Sprint
-                    if(real.sprint && real.sprint.length > 0) {
-                        real.sprint.forEach((driver, posReal) => {
-                            const posUser = pred.sprint.indexOf(driver);
-                            if(posUser !== -1) {
-                                const diff = Math.abs(posReal - posUser);
-                                if(diff === 0) this.data.scores[u] += 20;
-                                else if(diff === 1) this.data.scores[u] += 5;
+                    const logic = (p, r) => {
+                        // r es el array oficial [1ro, 2do, 3ro...]
+                        // p es el array del usuario [1ro, 2do, 3ro...]
+                        r.forEach((pilotoReal, posRealIdx) => {
+                            if(!pilotoReal) return;
+                            const posUserIdx = p.indexOf(pilotoReal);
+                            
+                            if(posUserIdx !== -1) {
+                                const diff = Math.abs(posRealIdx - posUserIdx);
+                                if(diff === 0) {
+                                    this.data.scores[u] += 25; // Exacto
+                                } else if(diff === 1) {
+                                    this.data.scores[u] += 5; // +- 1 posición
+                                }
                             }
                         });
+                    };
+
+                    logic(userPred.race, real.race);
+                    if(real.sprint && real.sprint.some(x => x !== "")) {
+                        logic(userPred.sprint, real.sprint);
                     }
                 });
             });
-
-            this.save();
-            alert("BANDERA A CUADROS: Puntos calculados.");
+            
+            this.save(); 
+            alert("¡Tabla de posiciones actualizada!"); 
             changeView('view-leaderboard');
         },
 
-        save() { localStorage.setItem('f1_prode_v2', JSON.stringify(this.data)); }
+        resetStats() {
+            if(confirm("¿BORRAR TODO? Esto eliminará predicciones, resultados y puntos de todos.")) {
+                this.data = { preds: {}, results: {}, scores: { Sole: 0, Marce: 0, Valen: 0, Agus: 0 } };
+                this.save(); 
+                location.reload();
+            }
+        },
+
+        save() { localStorage.setItem('f1_prode_v6', JSON.stringify(this.data)); }
     };
 
     function changeView(id) {
-        ['view-login', 'view-dashboard', 'view-prediction', 'view-admin', 'view-leaderboard'].forEach(v => {
-            document.getElementById(v).classList.add('hidden');
-        });
+        ['view-login', 'view-dashboard', 'view-prediction', 'view-admin', 'view-leaderboard'].forEach(v => document.getElementById(v).classList.add('hidden'));
         document.getElementById(id).classList.remove('hidden');
         if(id === 'view-leaderboard') renderLeaderboard();
         if(id === 'view-admin') {
-            const sel = document.getElementById('adminSelect');
-            sel.innerHTML = '<option value="">Selecciona GP Finalizado</option>';
-            CALENDAR.forEach(gp => sel.innerHTML += `<option value="${gp.id}">${gp.name}</option>`);
+            const s = document.getElementById('adminSelect');
+            s.innerHTML = '<option value="">--- Selecciona un GP ---</option>';
+            CALENDAR.forEach(g => s.innerHTML += `<option value="${g.id}">${g.name}</option>`);
         }
     }
 
     function renderLeaderboard() {
-        const body = document.getElementById('leaderboardBody');
-        body.innerHTML = "";
-        const sorted = Object.entries(app.data.scores).sort((a,b) => b[1] - a[1]);
-        sorted.forEach((e, i) => {
-            body.innerHTML += `
-                <tr>
-                    <td class="pos-num" style="color:${i==0?'var(--gold)':'white'}">${i+1}</td>
-                    <td style="font-size:1.5rem; font-family:Orbitron">${e[0]}</td>
-                    <td style="text-align:right; font-size:1.5rem; color:var(--f1-red); font-weight:900">${e[1]} PTS</td>
-                </tr>
-            `;
+        const b = document.getElementById('leaderboardBody');
+        b.innerHTML = "";
+        Object.entries(app.data.scores).sort((a,b) => b[1]-a[1]).forEach((e, i) => {
+            const isFirst = i === 0 && e[1] > 0;
+            const color = isFirst ? 'var(--gold)' : 'white';
+            const icon = isFirst ? '👑 ' : '';
+            b.innerHTML += `<tr>
+                <td style="color:${color}; font-weight:900">#${i+1}</td>
+                <td style="font-family:Orbitron; color:${color}">${icon}${e[0]}</td>
+                <td style="color:var(--f1-red); font-weight:900; text-align:right">${e[1]} PTS</td>
+            </tr>`;
         });
     }
 </script>
